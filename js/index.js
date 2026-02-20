@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Intersection Observer for Fade-in Animations
+
     const observerOptions = {
-        root: null, // use viewport
-        threshold: 0.2, // trigger when 20% of element is visible
+        root: null, 
+        threshold: 0.2, 
         rootMargin: "0px"
     };
 
@@ -11,17 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Stop observing once faded in (remove if you want re-animate)
-                // observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
 
-    // Select all elements to animate
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(el => observer.observe(el));
 
-    // 2. Navbar Active State on Scroll (Optional polish)
     const sections = document.querySelectorAll('section');
     const navLi = document.querySelectorAll('nav ul li a');
 
@@ -44,38 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => navObserver.observe(section));
 });
 
-/* --- เพิ่มต่อท้ายไฟล์ js/script.js --- */
-
-// Logic สำหรับ Filter ปุ่ม
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = document.querySelectorAll('.activity-item');
 
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // 1. ลบ class 'active' ออกจากปุ่มเดิม แล้วใส่ให้ปุ่มที่เพิ่งกด
+
         document.querySelector('.filter-btn.active').classList.remove('active');
         btn.classList.add('active');
 
-        // 2. อ่านค่าหมวดหมู่จาก text ในปุ่ม (เช่น Adventure, Science)
         const category = btn.textContent.toLowerCase();
 
-        // 3. วนลูปเช็คการ์ดทุกใบ
         cards.forEach(card => {
-            // ถ้าเลือก All หรือ หมวดหมู่ตรงกัน -> ให้แสดง
             if (category === 'all' || card.getAttribute('data-category') === category) {
                 card.style.display = 'flex';
-                // ใส่ Animation ให้ดูนุ่มนวลตอนโผล่มา
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1)';
                 }, 100);
             } else {
-                // ถ้าไม่ตรง -> ซ่อน
                 card.style.opacity = '0';
                 card.style.transform = 'scale(0.8)';
                 setTimeout(() => {
                     card.style.display = 'none';
-                }, 300); // รอให้ Fade out เสร็จก่อนค่อยซ่อนพื้นที่
+                }, 300);
             }
         });
     });

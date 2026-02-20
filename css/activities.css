@@ -1,12 +1,9 @@
-/* =========================================
-   1. CORE VARIABLES & RESET (ยกมาจาก Index)
-   ========================================= */
-   :root {
+:root {
     --bg-color: #020604;
     --neon-green: #32ff7e;
     --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.2);       /* สำคัญมาก! */
-    --glass-border-light: rgba(255, 255, 255, 0.5); /* สำคัญมาก! */
+    --glass-border: rgba(255, 255, 255, 0.2);   
+    --glass-border-light: rgba(255, 255, 255, 0.5); 
     --text-color: #ffffff;
     --font-main: 'Kanit', sans-serif;
     --font-display: 'Rajdhani', sans-serif;
@@ -15,20 +12,15 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* สำคัญ! จัดระเบียบกล่อง */
+    box-sizing: border-box; 
 }
 
 a { text-decoration: none; color: inherit; }
 
-/* =========================================
-   2. MAIN LAYOUT & BACKGROUND
-   ========================================= */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
-    
-    /* Background Image เฉพาะหน้า Activities */
     background-image: 
         linear-gradient(to bottom, rgba(2, 6, 4, 0.7), rgba(2, 6, 4, 0.95)), 
         url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&q=80');
@@ -39,22 +31,17 @@ body {
     min-height: 100vh;
 }
 
-/* Page Container */
 .page-container {
-    padding: 120px 5% 50px; /* เพิ่มด้านบนเผื่อ Navbar */
+    padding: 120px 5% 50px;
     min-height: 100vh;
     background: transparent; 
 }
 
-/* Utility Class */
 .neon-text {
     color: var(--neon-green);
     text-shadow: 0 0 10px rgba(50, 255, 126, 0.5);
 }
 
-/* =========================================
-   3. NAVBAR (เหมือนหน้า Index เป๊ะๆ)
-   ========================================= */
 .glass-nav {
     position: fixed;
     top: 20px;
@@ -66,11 +53,8 @@ body {
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border-radius: 16px;
-    
-    /* ตอนนี้ตัวแปรทำงานแล้ว ขอบจะขึ้นสวยงาม */
     border-top: 1px solid var(--glass-border-light);
     border-bottom: 1px solid var(--glass-border);
-    
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: space-between;
@@ -106,7 +90,6 @@ body {
     text-shadow: 0 0 8px var(--neon-green);
 }
 
-/* Mobile Nav */
 @media (max-width: 768px) {
     .glass-nav { 
         bottom: 20px; top: auto; 
@@ -115,11 +98,6 @@ body {
     .nav-links { gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; justify-content: center; }
 }
 
-/* =========================================
-   4. ACTIVITIES SPECIFIC STYLES
-   ========================================= */
-
-/* Header */
 .activity-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -131,7 +109,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Filters */
 .filters {
     margin-top: 1.5rem;
     display: flex;
@@ -158,16 +135,13 @@ body {
     border-color: var(--neon-green);
 }
 
-/* Card Grid System */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
     gap: 2rem;
 }
 
-/* Glass Card Design (Activities) */
 .glass-card {
-    /* ใช้ค่าพื้นฐานเดียวกับ Index แต่ปรับแต่งสำหรับ Grid */
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -194,7 +168,6 @@ body {
                 0 0 15px rgba(50, 255, 126, 0.2); 
 }
 
-/* Image Section */
 .card-image {
     height: 200px;
     background-size: cover;
@@ -203,7 +176,6 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Badges */
 .badge {
     position: absolute;
     top: 15px;
@@ -220,7 +192,6 @@ body {
 .badge.science { background: rgba(46, 134, 222, 0.8); color: #fff; }
 .badge.relax { background: rgba(16, 172, 132, 0.8); color: #fff; }
 
-/* Content Section */
 .card-content {
     padding: 1.5rem;
     display: flex;
@@ -242,7 +213,6 @@ body {
     flex-grow: 1; 
 }
 
-/* Meta Info */
 .card-meta {
     display: flex;
     justify-content: space-between;
@@ -257,7 +227,6 @@ body {
     color: var(--neon-green);
 }
 
-/* Button */
 .neon-btn-sm {
     width: 100%;
     padding: 10px;
@@ -279,7 +248,6 @@ body {
     box-shadow: 0 0 10px var(--neon-green);
 }
 
-/* Animation */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -289,9 +257,6 @@ body {
 .delay-1 { transition-delay: 0.2s; }
 .delay-2 { transition-delay: 0.4s; }
 
-/* =========================================
-   5. MODAL POPUP
-   ========================================= */
 .modal-overlay {
     display: none;
     position: fixed;
