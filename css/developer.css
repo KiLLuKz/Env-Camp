@@ -1,0 +1,162 @@
+/* =========================================
+   1. CORE VARIABLES & RESET
+   ========================================= */
+:root {
+    --bg-color: #020604;
+    --neon-green: #32ff7e;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-light: rgba(255, 255, 255, 0.5);
+    --font-main: 'Kanit', sans-serif;
+    --font-display: 'Rajdhani', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: #fff;
+    font-family: var(--font-main);
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(50, 255, 126, 0.05), transparent),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/1012_-_Erawan_Waterfall%2C_2nd_floor_-_Waterfall_in_Si_Sawat.jpg/1920px-1012_-_Erawan_Waterfall%2C_2nd_floor_-_Waterfall_in_Si_Sawat.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. NAVBAR & HEADER
+   ========================================= */
+.glass-nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 96%; padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 16px; border-top: 1px solid var(--glass-border-light);
+    display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-family: var(--font-display); text-transform: uppercase; transition: 0.3s; color: #fff; text-decoration: none; }
+.nav-links a:hover, .active-link { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+
+.page-container {
+    padding: 140px 5% 40px;
+    max-width: 1000px; /* ปรับให้แคบลงเพื่อให้ดูเป็น List สวยๆ */
+    margin: 0 auto;
+}
+
+.dev-header { margin-bottom: 50px; text-align: center; }
+.dev-header h1 { font-family: var(--font-display); font-size: 3rem; text-shadow: 0 0 15px rgba(50, 255, 126, 0.3); }
+
+/* =========================================
+   3. DEVELOPER LIST (แนวยาว)
+   ========================================= */
+.dev-grid {
+    display: flex;
+    flex-direction: column; /* เรียงจากบนลงล่าง */
+    gap: 15px;
+    width: 100%;
+}
+
+.dev-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border-light);
+    border-radius: 15px;
+    padding: 15px 30px;
+    
+    display: flex; /* จัดวางแนวนอน */
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+    text-align: left;
+}
+
+.dev-item:hover {
+    transform: translateX(15px); /* เลื่อนขวาตอนชี้ */
+    border-color: var(--neon-green);
+    background: rgba(50, 255, 126, 0.05);
+    box-shadow: -5px 0 20px rgba(50, 255, 126, 0.1);
+}
+
+.dev-avatar {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--neon-green);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green);
+}
+
+.dev-info {
+    display: flex;
+    flex-direction: row; /* จัดเนื้อหาชื่อชั้นเลขที่ในบรรทัดเดียว */
+    align-items: center;
+    justify-content: space-between; /* กระจายชื่อไปซ้าย ข้อมูลไปขวา */
+    flex-grow: 1;
+}
+
+.dev-info h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-width: 250px; /* ล็อกความกว้างชื่อให้เท่ากันทุกคน */
+}
+
+.dev-details {
+    display: flex;
+    gap: 30px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.neon-text { color: var(--neon-green); }
+
+/* =========================================
+   4. FOOTER & ANIMATION
+   ========================================= */
+.simple-footer { margin-top: 60px; padding-bottom: 20px; display: flex; justify-content: center; }
+.glass-footer {
+    padding: 0.8rem 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    font-size: 0.9rem;
+}
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* =========================================
+   5. MOBILE RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .dev-item {
+        flex-direction: column; /* กลับเป็นแนวตั้งในมือถือ */
+        padding: 30px;
+        gap: 15px;
+        text-align: center;
+    }
+    .dev-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .dev-info h3 { min-width: unset; }
+    .dev-item:hover { transform: translateY(-10px); }
+    .glass-nav { bottom: 20px; top: auto; flex-direction: column; padding: 1rem; }
+}

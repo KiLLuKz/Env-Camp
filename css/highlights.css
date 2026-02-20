@@ -1,0 +1,177 @@
+/* =========================================
+   1. CORE VARIABLES & RESET
+   ========================================= */
+:root {
+    --bg-color: #020604;
+    --neon-green: #32ff7e;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-light: rgba(255, 255, 255, 0.5);
+    --text-color: #ffffff;
+    --font-main: 'Kanit', sans-serif;
+    --font-display: 'Rajdhani', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    /* สำคัญ: หน้า Gallery ต้องเลื่อนได้ปกติ */
+    overflow-y: auto; 
+    background-image: linear-gradient(rgba(2,6,4,0.9), rgba(2,6,4,0.9)), 
+                      url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* =========================================
+   2. NAVBAR & UTILITY
+   ========================================= */
+.glass-nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 96%; padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 16px; border-top: 1px solid var(--glass-border-light);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+}
+
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-family: var(--font-display); text-transform: uppercase; transition: 0.3s; }
+.nav-links a:hover { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+
+.neon-text {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px rgba(50, 255, 126, 0.5);
+}
+
+/* =========================================
+   3. GALLERY SECTION (The Grid)
+   ========================================= */
+.gallery-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 140px 5% 60px; /* เว้นที่ให้ Nav และ Footer */
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.image-grid {
+    display: grid;
+    /* แบ่ง 5 คอลัมน์ตามที่คุณต้องการ */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    aspect-ratio: 16 / 9; /* สัดส่วนรูปภาพ */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: #111;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.5s ease;
+}
+
+/* Hover Effect */
+.gallery-item:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: var(--neon-green);
+    box-shadow: 0 10px 30px rgba(50, 255, 126, 0.3);
+}
+
+.gallery-item:hover img {
+    filter: brightness(1.2);
+}
+
+/* =========================================
+   4. MODAL POPUP (Lightbox)
+   ========================================= */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 2000;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 85%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--neon-green);
+    border-radius: 15px;
+    box-shadow: 0 0 30px var(--neon-green);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--neon-green);
+    transform: rotate(90deg);
+}
+
+/* =========================================
+   5. RESPONSIVE
+   ========================================= */
+@media (max-width: 1400px) {
+    .image-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 1024px) {
+    .image-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .image-grid { grid-template-columns: repeat(2, 1fr); }
+    .glass-nav { bottom: 20px; top: auto; flex-direction: column; padding: 1rem; }
+    .close-modal { top: 10px; right: 20px; }
+}

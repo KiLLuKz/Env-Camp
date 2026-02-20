@@ -1,0 +1,204 @@
+/* =========================================
+   1. CORE VARIABLES & RESET 
+   ========================================= */
+:root {
+    --bg-color: #020604;
+    --neon-green: #32ff7e;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-light: rgba(255, 255, 255, 0.5);
+    --text-color: #ffffff;
+    --font-main: 'Kanit', sans-serif;
+    --font-display: 'Rajdhani', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    /* พื้นหลังแบบจางๆ ให้เห็นลายป่า */
+    background-image: 
+        linear-gradient(to bottom, rgba(2, 6, 4, 0.85), rgba(2, 6, 4, 0.95)), 
+        url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* =========================================
+   2. NAVBAR & UTILITY
+   ========================================= */
+.glass-nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 96%; padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(30px);
+    border-radius: 16px; border-top: 1px solid var(--glass-border-light);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+}
+
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-family: var(--font-display); text-transform: uppercase; transition: 0.3s; }
+.nav-links a:hover { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+
+.neon-text {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px rgba(50, 255, 126, 0.5);
+}
+
+/* =========================================
+   3. CAMP SECTION LAYOUT
+   ========================================= */
+.gallery-section {
+    min-height: 100vh;
+    padding: 120px 5% 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-family: var(--font-display);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.camp-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* รูปฝั่งซ้ายใหญ่กว่านิดนึง */
+    gap: 40px;
+    align-items: start;
+}
+
+/* Image Styling */
+.camp-image-wrapper {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border-light);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: sticky; /* ให้รูปนิ่งเวลาเลื่อนดูเนื้อหา */
+    top: 120px;
+}
+
+.camp-main-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.camp-image-wrapper:hover .camp-main-img {
+    transform: scale(1.05);
+}
+
+/* Glass Card Info */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border-light);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.glass-card p {
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 25px;
+}
+
+/* --- Features List (ป่าสวย/ที่พักดี) --- */
+.camp-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border-left: 3px solid var(--neon-green);
+    transition: 0.3s;
+}
+
+.feature-item:hover {
+    background: rgba(50, 255, 126, 0.08);
+    transform: translateX(10px);
+}
+
+.feature-icon { font-size: 1.5rem; }
+
+.feature-text strong {
+    display: block;
+    color: var(--neon-green);
+    font-family: var(--font-display);
+    margin-bottom: 4px;
+}
+
+.feature-text p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Meta Data */
+.camp-meta {
+    border-top: 1px solid var(--glass-border);
+    padding-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meta-item {
+    font-family: var(--font-display);
+    font-size: 1rem;
+}
+
+/* =========================================
+   4. RESPONSIVE
+   ========================================= */
+@media (max-width: 992px) {
+    .camp-container {
+        grid-template-columns: 1fr; /* ยุบเหลือคอลัมน์เดียวบน Tablet/Mobile */
+    }
+    .camp-image-wrapper {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-nav { 
+        bottom: 20px; top: auto; flex-direction: column; 
+        height: auto; padding: 1rem; 
+    }
+    .nav-links { gap: 1rem; font-size: 0.8rem; }
+    .glass-card { padding: 25px; }
+}
